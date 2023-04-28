@@ -23,9 +23,9 @@
 			<key>Arguments</key>
 			<dict>
 				<key>asset_regex</key>
-				<string>.*\.dmg$</string>
+				<string>.*\.(dmg|arm64\.dmg)$</string>
 				<key>github_repo</key>
-				<string>dbeaver/dbeaver</string>
+				<<string>dbeaver/dbeaver</string>
 			</dict>
 			<key>Processor</key>
 			<string>GitHubReleasesInfoProvider</string>
@@ -34,7 +34,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>filename</key>
-				<string>%NAME%-%version%.dmg</string>
+				<string>%NAME%-%version%-%asset_architecture%.dmg</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLDownloader</string>
