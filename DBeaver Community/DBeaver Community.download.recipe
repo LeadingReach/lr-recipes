@@ -27,7 +27,7 @@
 				<key>github_repo</key>
 				<array>
 					<string>dbeaver/dbeaver</string>
-					<string>dbeaver/dbeaver/releases/tag/${version}-ee</string>
+					<string>dbeaver/dbeaver/releases/tag/${version}</string>
 				</array>
 			</dict>
 			<key>Processor</key>
