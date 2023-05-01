@@ -27,7 +27,7 @@
 			<key>developer</key>
 			<string>DBeaver Corporation</string>
 			<key>display_name</key>
-			<string>DBeaver Community</string>
+			<string>DBeaver Community x86</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
