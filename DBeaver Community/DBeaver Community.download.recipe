@@ -5,7 +5,7 @@
 	<key>Comment</key>
 	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>Downloads the latest version of DBeaver Community.</string>
+	<string>Downloads the latest version of DBeaver Community for both x86_64 and aarch64 architectures.</string>
 	<key>Identifier</key>
 	<string>com.github.lr-recipes.download.DBeaverCommunity</string>
 	<key>Input</key>
@@ -23,9 +23,12 @@
 			<key>Arguments</key>
 			<dict>
 				<key>asset_regex</key>
-				<string>.*\.(x86_64|aarch64\.dmg)$</string>
+				<string>.*\x86_64.dmg$</string>
 				<key>github_repo</key>
-				<string>dbeaver/dbeaver</string>
+				<array>
+					<string>dbeaver/dbeaver</string>
+					<string>dbeaver/dbeaver/releases/tag/${version}-ee</string>
+				</array>
 			</dict>
 			<key>Processor</key>
 			<string>GitHubReleasesInfoProvider</string>
@@ -34,7 +37,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>filename</key>
-				<string>%NAME%-%version%-%asset_architecture%.dmg</string>
+				<string>%NAME%-%version%.dmg</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLDownloader</string>

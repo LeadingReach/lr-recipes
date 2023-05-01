@@ -22,35 +22,8 @@
 	<key>Process</key>
 	<array>
 		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>input_path</key>
-				<string>%pathname%/DBeaver.app</string>
-				<key>output_path</key>
-				<string>%RECIPE_CACHE_DIR%/%NAME%.app</string>
-			</dict>
 			<key>Processor</key>
-			<string>PathDeleter</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>input_path</key>
-				<string>%RECIPE_CACHE_DIR%/%NAME%.app</string>
-				<key>output_path</key>
-				<string>%RECIPE_CACHE_DIR%/DBeaver.pkg/Payload/%NAME%.app</string>
-			</dict>
-			<key>Processor</key>
-			<string>PathMover</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>filename</key>
-				<string>DBeaverCommunity-%version%-%ARCH%.pkg</string>
-			</dict>
-			<key>Processor</key>
-			<string>GenericPkgCreator</string>
+			<string>AppPkgCreator</string>
 		</dict>
 	</array>
 </dict>
