@@ -9,6 +9,8 @@
 	<key>Identifier</key>
 	<string>com.github.lr-recipes.munki.DBeaverCommunity</string>
 	<key>Input</key>
+		<key>force_munkiimport</key>
+			<true />
 	<dict>
 		<key>APP_FILENAME</key>
 		<string>DBeaver</string>
