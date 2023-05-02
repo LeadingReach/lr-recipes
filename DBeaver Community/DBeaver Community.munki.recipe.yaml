@@ -6,7 +6,6 @@ MinimumVersion: 1.0.0
 
 Input:
   NAME: DBeaver Community
-  force_munkiimport: true
   APP_FILENAME: DBeaver
   MUNKI_REPO_SUBDIR: apps/%NAME%
   pkginfo:
