@@ -10,7 +10,16 @@ Input:
 Process:
 - Processor: GitHubReleasesInfoProvider
   Arguments:
-    asset_regex: .*(x86_64|aarch64)\.dmg$
+    asset_regex: .*x86_64\.dmg$
+    github_repo: dbeaver/dbeaver
+
+- Processor: URLDownloader
+  Arguments:
+    filename: '%NAME%-%version%.dmg'
+
+- Processor: GitHubReleasesInfoProvider
+  Arguments:
+    asset_regex: .*aarch64\.dmg$
     github_repo: dbeaver/dbeaver
 
 - Processor: URLDownloader
