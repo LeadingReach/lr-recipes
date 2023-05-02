@@ -19,6 +19,18 @@ Process:
 
 - Processor: EndOfCheckPhase
 
+Process:
+- Processor: GitHubReleasesInfoProvider
+  Arguments:
+    asset_regex: .*aarch64\.dmg$
+    github_repo: dbeaver/dbeaver
+
+- Processor: URLDownloader
+  Arguments:
+    filename: '%NAME%-%version%.dmg'
+
+- Processor: EndOfCheckPhase
+
 - Processor: CodeSignatureVerifier
   Arguments:
     input_path: '%pathname%/DBeaver.app'
