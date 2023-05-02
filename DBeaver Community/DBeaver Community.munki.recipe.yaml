@@ -1,7 +1,7 @@
 Comment: Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)
 Description: Downloads the latest version of DBeaver Community and imports it into Munki.
 Identifier: com.github.lr-recipes.munki.DBeaverCommunity
-ParentRecipe: com.github.lr-recipes.pkg.DBeaverCommunity
+ParentRecipe: com.github.lr-recipes.download.DBeaverCommunity
 MinimumVersion: 1.0.0
 
 Input:
