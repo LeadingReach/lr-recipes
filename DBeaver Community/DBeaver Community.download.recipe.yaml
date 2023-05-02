@@ -1,0 +1,29 @@
+---
+Description: Downloads the latest version of DBeaver Community.
+Identifier: com.github.lr-recipes.download.DBeaverCommunity
+MinimumVersion: '2.3'
+
+Process:
+  - Processor: GitHubReleasesInfoProvider
+    Arguments:
+      asset_regex: '.*x86_64\.dmg$$'
+      github_repo: dbeaver/dbeaver
+      
+  - Processor: URLDownloader
+    Arguments:
+    filename: '%NAME%-%version%.dmg'
+
+  - Processor: EndOfCheckPhase
+
+  - Processor: CodeSignatureVerifier
+    Arguments:
+      input_path: '%pathname%/DBeaver.app'
+      requirement: |
+        identifier "org.jkiss.dbeaver.core.product" and anchor apple generic and certificate
+        1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13]
+        /* exists */ and certificate leaf[subject.OU] = "42B6MDKMW8"
+
+  - Processor: Versioner
+    Arguments:
+      input_plist_path: '%pathname%/DBeaver.app/Contents/Info.plist'
+      plist_version_key: CFBundleShortVersionString
