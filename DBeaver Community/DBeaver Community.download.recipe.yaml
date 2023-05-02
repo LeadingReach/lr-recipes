@@ -15,7 +15,8 @@ Process:
 
 - Processor: URLDownloader
   Arguments:
-    filename: '%NAME%-%version%.dmg'
+    filename: '%NAME%-%version%-x86_64.dmg'
+    download_dir: '%RECIPE_CACHE_DIR%/downloads'
 
 - Processor: GitHubReleasesInfoProvider
   Arguments:
@@ -24,7 +25,8 @@ Process:
 
 - Processor: URLDownloader
   Arguments:
-    filename: '%NAME%-%version%.dmg'
+    filename: '%NAME%-%version%-arm64.dmg'
+    download_dir: '%RECIPE_CACHE_DIR%/downloads'
 
 - Processor: EndOfCheckPhase
 
