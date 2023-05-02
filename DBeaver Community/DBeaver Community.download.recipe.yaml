@@ -10,7 +10,7 @@ Input:
 Process:
 - Processor: GitHubReleasesInfoProvider
   Arguments:
-    asset_regex: .*\.dmg$
+    asset_regex: .*x86_64\.dmg$
     github_repo: dbeaver/dbeaver
 
 - Processor: URLDownloader
