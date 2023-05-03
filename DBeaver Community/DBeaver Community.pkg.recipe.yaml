@@ -50,3 +50,9 @@ Process:
         pkgdir: '%RECIPE_CACHE_DIR%'
         scripts: '%RECIPE_CACHE_DIR%/Universal/Scripts'
         pkgroot: '%RECIPE_CACHE_DIR%/Universal/pkgroot'
+
+  - Processor: PathDeleter
+    Arguments:
+      path_list:
+        - '%RECIPE_CACHE_DIR%/Universal/Scripts/%NAME%-x86_64-%version%.pkg'
+        - '%RECIPE_CACHE_DIR%/Universal/Scripts/%NAME%-arm64-%version%.pkg'
