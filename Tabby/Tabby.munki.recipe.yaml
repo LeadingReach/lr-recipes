@@ -1,0 +1,22 @@
+Comment: Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)
+Description: Downloads the latest version of Tabby and imports it into Munki.
+Identifier: com.github.lr-recipes.munki.Tabby
+ParentRecipe: com.github.lr-recipes.download.Tabby
+MinimumVersion: 1.0.0
+
+Input:
+  NAME: Tabby
+  MUNKI_REPO_SUBDIR: apps/%NAME%
+  pkginfo:
+    catalogs:
+    - testing
+    description: A terminal for a more modern age
+    developer: Syslink GmbH
+    display_name: Tabby
+    name: '%NAME%'
+    unattended_install: true
+
+- Processor: MunkiImporter
+  Arguments:
+    pkg_path: '%RECIPE_CACHE_DIR%/%NAME%-Universal-%version%.pkg'
+    repo_subdirectory: '%MUNKI_REPO_SUBDIR%'
