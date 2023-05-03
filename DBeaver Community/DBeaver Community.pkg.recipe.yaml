@@ -2,13 +2,13 @@ Comment: Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-r
 Description: Downloads the latest version of DBeaver Community and creates a package.
 Identifier: com.github.lr-recipes.pkg.DBeaverCommunity
 ParentRecipe: com.github.lr-recipes.download.DBeaverCommunity
-MinimumVersion: '2.3'
+MinimumVersion: 1.0.0
 
 Input:
   NAME: DBeaver Community
   APP_FILENAME: DBeaver
 
-PProcess:
+Process:
   - Processor: PkgRootCreator
     Arguments:
       pkgroot: '%RECIPE_CACHE_DIR%/Universal'
@@ -16,59 +16,15 @@ PProcess:
         pkgroot: '0775'
         Scripts: '0775'
 
-  - Processor: PkgRootCreator
+  - Processor: AppPkgCreator
     Arguments:
-      pkgdirs:
-        Applications: '0775'
-      pkgroot: '%RECIPE_CACHE_DIR%/payload'
+      app_path: '%RECIPE_CACHE_DIR%/downloads/%NAME%-%version%-arm64.dmg/DBeaver.app'
+      pkg_path: '%RECIPE_CACHE_DIR%/Universal/Scripts/%NAME%-arm64-%version%.pkg'
 
-  - Processor: Copier
+  - Processor: AppPkgCreator
     Arguments:
-      source_path: '%RECIPE_CACHE_DIR%/downloads/%NAME%-%version%-arm64.dmg/DBeaver.app'
-      destination_path: '%pkgroot%/Applications/DBeaver.app'
-      overwrite: True
-
-  - Processor: PkgCreator
-    Arguments:
-      pkg_request:
-        chown:
-          - group: admin
-            path: Applications
-            user: root
-        id: '%bundleid%'
-        options: purge_ds_store
-        pkgdir: '%RECIPE_CACHE_DIR%'
-        pkgname: '%NAME%-arm64-%version%'
-        scripts: scripts
-
-  - Processor: FileMover
-    Arguments:
-      source: '%pkg_path%'
-      target: '%RECIPE_CACHE_DIR%/Universal/Scripts/%NAME%-arm64-%version%.pkg'
-
-  - Processor: Copier
-    Arguments:
-      source_path: '%RECIPE_CACHE_DIR%/downloads/%NAME%-%version%-x86_64.dmg/DBeaver.app'
-      destination_path: '%pkgroot%/Applications/DBeaver.app'
-      overwrite: True
-
-  - Processor: PkgCreator
-    Arguments:
-      pkg_request:
-        chown:
-          - group: admin
-            path: Applications
-            user: root
-        id: '%bundleid%'
-        options: purge_ds_store
-        pkgdir: '%RECIPE_CACHE_DIR%'
-        pkgname: '%NAME%-x86_64-%version%'
-        scripts: scripts
-
-  - Processor: FileMover
-    Arguments:
-      source: '%pkg_path%'
-      target: '%RECIPE_CACHE_DIR%/Universal/Scripts/%NAME%-x86_64-%version%.pkg'
+      app_path: '%RECIPE_CACHE_DIR%/downloads/%NAME%-%version%-x86_64.dmg/DBeaver.app'
+      pkg_path: '%RECIPE_CACHE_DIR%/Universal/Scripts/%NAME%-x86_64-%version%.pkg'
 
   - Processor: FileCreator
     Arguments:
@@ -84,7 +40,6 @@ PProcess:
           /usr/sbin/installer -pkg "$x86_64_package" -target "$3"
         fi
         exit 0
-        
   - Processor: PkgCreator
     Arguments:
       pkg_request:
