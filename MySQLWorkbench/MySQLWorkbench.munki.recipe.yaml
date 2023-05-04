@@ -1,0 +1,22 @@
+Comment: Based on https://github.com/autopkg/homebysix-recipes5
+Description: Builds MySQLWorkbench and imports into a Munki repo.
+Identifier: com.github.homebysix.munki.MySQLWorkbench
+ParentRecipe: com.github.homebysix.download.MySQLWorkbench
+MinimumVersion: 0.6.0
+
+Input:
+  NAME: MySQLWorkbench
+  MUNKI_REPO_SUBDIR: apps/%NAME%
+  pkginfo:
+    catalogs:
+    - testing
+    description: MySQL Workbench is a unified visual tool for database architects, developers, and DBAs.
+    display_name: MySQLWorkbench
+    name: '%NAME%'
+    unattended_install: true
+
+Process:
+- Processor: MunkiImporter
+  Arguments:
+    pkg_path: '%pathname%'
+    repo_subdirectory: '%MUNKI_REPO_SUBDIR%'

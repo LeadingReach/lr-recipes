@@ -1,0 +1,11 @@
+Comment: Based on https://github.com/autopkg/homebysix-recipes
+Description: Downloads the latest version of MySQLWorkbench and builds a pkg.
+Identifier: com.github.homebysix.pkg.MySQLWorkbench
+ParentRecipe: com.github.homebysix.download.MySQLWorkbench
+MinimumVersion: 1.0.0
+
+Input:
+  NAME: MySQLWorkbench
+
+Process:
+- Processor: AppPkgCreator
