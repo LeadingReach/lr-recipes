@@ -20,7 +20,6 @@ Process:
     filename: '%NAME%.dmg'
     url: https://dev.mysql.com/get/Downloads/MySQLGUITools/%dmg%
 
-Process:
 - Processor: URLTextSearcher
   Arguments:
     re_pattern: (?P<dmg>mysql-workbench-community-(?P<version>[\d.]+)-\S+x86_64\.dmg)
