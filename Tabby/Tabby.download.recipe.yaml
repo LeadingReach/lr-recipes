@@ -29,18 +29,6 @@ Process:
 
 - Processor: EndOfCheckPhase
 
-- Processor: Unarchiver
-  Arguments:
-    archive_path: '%RECIPE_CACHE_DIR%/downloads/%NAME%-%version%-arm64.zip'
-    destination_path: '%RECIPE_CACHE_DIR%/unpack/arm64'
-    purge_destination: true
-
-- Processor: Unarchiver
-  Arguments:
-    archive_path: '%RECIPE_CACHE_DIR%/downloads/%NAME%-%version%-x86_64.zip'
-    destination_path: '%RECIPE_CACHE_DIR%/unpack/x86_64'
-    purge_destination: true
-
 - Processor: CodeSignatureVerifier
   Arguments:
     input_path: '%RECIPE_CACHE_DIR%/unpack/arm64/Tabby.app'
