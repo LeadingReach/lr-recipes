@@ -9,6 +9,7 @@ Input:
 Process:
 - Processor: GitHubReleasesInfoProvider
   Arguments:
+    include_prereleases: False
     asset_regex: .*arm64\.zip$
     github_repo: Eugeny/tabby
 
@@ -19,6 +20,7 @@ Process:
 
 - Processor: GitHubReleasesInfoProvider
   Arguments:
+    include_prereleases: False
     asset_regex: .*x86_64\.zip$
     github_repo: Eugeny/tabby
 

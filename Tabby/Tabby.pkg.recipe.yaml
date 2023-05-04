@@ -5,6 +5,7 @@ MinimumVersion: '2.3'
 
 Input:
   NAME: Tabby
+  APP_FILENAME: Tabby
 
 Process:
   - Processor: PkgRootCreator
@@ -38,6 +39,7 @@ Process:
           /usr/sbin/installer -pkg "$x86_64_package" -target "$3"
         fi
         exit 0
+
   - Processor: PkgCreator
     Arguments:
       pkg_request:
@@ -45,7 +47,7 @@ Process:
         version: '%version%'
         options: purge_ds_store
         pkgname: '%NAME%-Universal-%version%'
-        pkgdir: '%RECIPE_CACHE_DIR%/Universal/Scripts'
+        pkgdir: '%RECIPE_CACHE_DIR%'
         scripts: '%RECIPE_CACHE_DIR%/Universal/Scripts'
         pkgroot: '%RECIPE_CACHE_DIR%/Universal/pkgroot'
 
