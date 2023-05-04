@@ -4,6 +4,7 @@ MinimumVersion: '2.3'
 
 Input:
   NAME: Tabby
+  APP_FILENAME: Tabby
 
 Process:
 - Processor: GitHubReleasesInfoProvider
@@ -54,9 +55,3 @@ Process:
   Arguments:
     input_plist_path: '%RECIPE_CACHE_DIR%/unpack/arm64/Tabby.app/Contents/Info.plist'
     plist_version_key: CFBundleShortVersionString
-
-- Processor: Versioner
-  Arguments:
-    input_plist_path: '%RECIPE_CACHE_DIR%/unpack/x86_64/Tabby.app/Contents/Info.plist'
-    plist_version_key: CFBundleShortVersionString
-
