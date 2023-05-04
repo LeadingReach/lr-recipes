@@ -6,6 +6,56 @@ MinimumVersion: '2.3'
 
 Input:
   NAME: MySQLWorkbench
+  APP_FILENAME: MySQLWorkbench
 
 Process:
 - Processor: AppPkgCreator
+
+Process:
+  - Processor: PkgRootCreator
+    Arguments:
+      pkgroot: '%RECIPE_CACHE_DIR%/Universal'
+      pkgdirs:
+        pkgroot: '0775'
+        Scripts: '0775'
+
+  - Processor: AppPkgCreator
+    Arguments:
+      app_path: '%RECIPE_CACHE_DIR%/downloads/%NAME%-%version%-arm64.dmg/MySQLWorkbench.app'
+      pkg_path: '%RECIPE_CACHE_DIR%/Universal/Scripts/%NAME%-arm64-%version%.pkg'
+
+  - Processor: AppPkgCreator
+    Arguments:
+      app_path: '%RECIPE_CACHE_DIR%/downloads/%NAME%-%version%-x86_64.dmg/MySQLWorkbench.app'
+      pkg_path: '%RECIPE_CACHE_DIR%/Universal/Scripts/%NAME%-x86_64-%version%.pkg'
+
+  - Processor: FileCreator
+    Arguments:
+      file_path: '%RECIPE_CACHE_DIR%/Universal/Scripts/preinstall'
+      file_mode: '0755'
+      file_content: |
+        #!/bin/bash
+        arm64_package="%NAME%-arm64-%version%.pkg"
+        x86_64_package="%NAME%-x86_64-%version%.pkg"
+        if [[ $( /usr/bin/arch ) = arm64* ]]; then
+          /usr/sbin/installer -pkg "$arm64_package" -target "$3"
+        else
+          /usr/sbin/installer -pkg "$x86_64_package" -target "$3"
+        fi
+        exit 0
+  - Processor: PkgCreator
+    Arguments:
+      pkg_request:
+        id: '%bundleid%'
+        version: '%version%'
+        options: purge_ds_store
+        pkgname: '%NAME%-Universal-%version%'
+        pkgdir: '%RECIPE_CACHE_DIR%/Universal/Scripts'
+        scripts: '%RECIPE_CACHE_DIR%/Universal/Scripts'
+        pkgroot: '%RECIPE_CACHE_DIR%/Universal/pkgroot'
+
+  - Processor: PathDeleter
+    Arguments:
+      path_list:
+        - '%RECIPE_CACHE_DIR%/Universal/Scripts/%NAME%-x86_64-%version%.pkg'
+        - '%RECIPE_CACHE_DIR%/Universal/Scripts/%NAME%-arm64-%version%.pkg'
