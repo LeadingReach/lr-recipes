@@ -7,39 +7,51 @@ Input:
   APP_FILENAME: Tabby
 
 Process:
-- Processor: GitHubReleasesInfoProvider
-  Arguments:
-    asset_regex: .*arm64\.zip$
-    github_repo: Eugeny/tabby
+  - Processor: GitHubReleasesInfoProvider
+    Arguments:
+      asset_regex: .*arm64\.zip$
+      github_repo: Eugeny/tabby
 
-- Processor: URLDownloader
-  Arguments:
-    filename: '%NAME%-%version%-arm64.zip'
-    download_dir: '%RECIPE_CACHE_DIR%/downloads'
+  - Processor: URLDownloader
+    Arguments:
+      filename: '%NAME%-%version%-arm64.zip'
+      download_dir: '%RECIPE_CACHE_DIR%/downloads'
 
-- Processor: GitHubReleasesInfoProvider
-  Arguments:
-    asset_regex: .*x86_64\.zip$
-    github_repo: Eugeny/tabby
+  - Processor: GitHubReleasesInfoProvider
+    Arguments:
+      asset_regex: .*x86_64\.zip$
+      github_repo: Eugeny/tabby
 
-- Processor: URLDownloader
-  Arguments:
-    filename: '%NAME%-%version%-x86_64.zip'
-    download_dir: '%RECIPE_CACHE_DIR%/downloads'
+  - Processor: URLDownloader
+    Arguments:
+      filename: '%NAME%-%version%-x86_64.zip'
+      download_dir: '%RECIPE_CACHE_DIR%/downloads'
 
-- Processor: EndOfCheckPhase
+  - Processor: EndOfCheckPhase
 
-- Processor: CodeSignatureVerifier
-  Arguments:
-    input_path: '%RECIPE_CACHE_DIR%/unpack/arm64/Tabby.app'
-    requirement: identifier "org.tabby" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = V4JSMC46SY
+  - Processor: Unarchiver
+    Arguments:
+      archive_path: '%RECIPE_CACHE_DIR%/downloads/%NAME%-%version%-arm64.zip'
+      destination_path: '%RECIPE_CACHE_DIR%/unpack/arm64'
+      purge_destination: true
 
-- Processor: CodeSignatureVerifier
-  Arguments:
-    input_path: '%RECIPE_CACHE_DIR%/unpack/x86_64/Tabby.app'
-    requirement: identifier "org.tabby" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = V4JSMC46SY
+  - Processor: Unarchiver
+    Arguments:
+      archive_path: '%RECIPE_CACHE_DIR%/downloads/%NAME%-%version%-x86_64.zip'
+      destination_path: '%RECIPE_CACHE_DIR%/unpack/x86_64'
+      purge_destination: true
 
-- Processor: Versioner
-  Arguments:
-    input_plist_path: '%RECIPE_CACHE_DIR%/unpack/arm64/Tabby.app/Contents/Info.plist'
-    plist_version_key: CFBundleShortVersionString
+  - Processor: CodeSignatureVerifier
+    Arguments:
+      input_path: '%RECIPE_CACHE_DIR%/unpack/arm64/Tabby.app'
+      requirement: identifier "org.tabby" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = V4JSMC46SY
+
+  - Processor: CodeSignatureVerifier
+    Arguments:
+      input_path: '%RECIPE_CACHE_DIR%/unpack/x86_64/Tabby.app'
+      requirement: identifier "org.tabby" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = V4JSMC46SY
+
+  - Processor: Versioner
+    Arguments:
+      input_plist_path: '%RECIPE_CACHE_DIR%/unpack/arm64/Tabby.app/Contents/Info.plist'
+      plist_version_key: CFBundleShortVersionString
