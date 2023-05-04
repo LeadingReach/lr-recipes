@@ -16,6 +16,7 @@ Input:
     name: '%NAME%'
     unattended_install: true
 
+Process:
 - Processor: MunkiImporter
   Arguments:
     pkg_path: '%RECIPE_CACHE_DIR%/%NAME%-Universal-%version%.pkg'
