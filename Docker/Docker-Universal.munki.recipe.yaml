@@ -1,0 +1,26 @@
+---
+Comment: Munki Recipie for docker https://github.com/autopkg/smithjw-recipes
+Description: Downloads the latest version of Docker and imports it into Munki.
+Identifier: com.github.lr-recipes.munki.Docker-Universal
+ParentRecipe: com.github.smithjw.pkg.Docker-Universal
+MinimumVersion: '2.3'
+
+Input:
+  NAME: Docker
+  MUNKI_REPO_SUBDIR: apps/%NAME%-%ARCHITECTURE%
+  pkginfo:
+    catalogs:
+      - testing
+    description: Spice up your Dock a little.
+    developer: Docker Inc
+    display_name: Docker
+    name: '%NAME%-%ARCHITECTURE%'
+    unattended_install: true
+    supported_architectures:
+      - '%ARCHITECTURE%'
+
+Process:
+  - Processor: MunkiImporter
+    Arguments:
+      pkg_path: '%pkg_path%'
+      repo_subdirectory: '%MUNKI_REPO_SUBDIR%'
