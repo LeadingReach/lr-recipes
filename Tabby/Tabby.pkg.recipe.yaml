@@ -40,15 +40,15 @@ Process:
         fi
         exit 0
 
-    - Processor: FileCreator
-    Arguments:
-      file_path: '%RECIPE_CACHE_DIR%/Universal/Scripts/postinstall'
-      file_mode: '0755'
-      file_content: |
-        #!/bin/bash
-        CONSOLE_USER=$(ls -l /dev/console | awk '{ print $3 }')
-        /usr/sbin/chown -R "$CONSOLE_USER": "/Applications/Tabby.app"
-        exit 0
+  - Processor: FileCreator
+  Arguments:
+    file_path: '%RECIPE_CACHE_DIR%/Universal/Scripts/postinstall'
+    file_mode: '0755'
+    file_content: |
+      #!/bin/bash
+      CONSOLE_USER=$(ls -l /dev/console | awk '{ print $3 }')
+      /usr/sbin/chown -R "$CONSOLE_USER": "/Applications/Tabby.app"
+      exit 0
 
   - Processor: PkgCreator
     Arguments:
