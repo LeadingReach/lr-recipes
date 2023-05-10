@@ -46,7 +46,7 @@ Process:
     file_mode: '0755'
     file_content: |
       #!/bin/bash
-      CONSOLE_USER=$(ls -l /dev/console | awk '{ print $3 }')
+      CONSOLE_USER=$(ls -l /dev/console | awk "{ print \$3 }")
       /usr/sbin/chown -R "$CONSOLE_USER": "/Applications/Tabby.app"
       exit 0
 
