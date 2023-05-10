@@ -7,17 +7,15 @@ MinimumVersion: '2.3'
 
 Input:
   NAME: Docker
-  MUNKI_REPO_SUBDIR: apps/%NAME%-%ARCHITECTURE%
+  MUNKI_REPO_SUBDIR: apps/Docker-Universal
   pkginfo:
     catalogs:
       - testing
     description: Spice up your Dock a little.
     developer: Docker Inc
     display_name: Docker
-    name: '%NAME%-%ARCHITECTURE%'
+    name: 'Docker-Universal'
     unattended_install: true
-    supported_architectures:
-      - '%ARCHITECTURE%'
 
 Process:
   - Processor: MunkiImporter
