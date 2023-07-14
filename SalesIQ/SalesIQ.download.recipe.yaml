@@ -1,0 +1,30 @@
+Description: Downloads the latest versions of SalesIQ
+Identifier: com.github.lr-recipes.download.SalesIQ
+MinimumVersion: '2.3'
+
+Input:
+  NAME: SalesIQ
+
+Process:
+  - Processor: URLTextSearcher
+    Arguments:
+      re_pattern: 'https://www\.zoho\.com/salesiq/desktop/mac/SalesIQ-.*\.dmg'
+      result_output_var_name: match
+      url: 'https://www.zoho.com/salesiq/help/live-chat-for-your-desktop-and-mobile-devices.html'
+
+  - Processor: URLDownloader
+    Arguments:
+      filename: '%NAME%.dmg'
+      download_dir: '%RECIPE_CACHE_DIR%/downloads'
+      url: '%match%'
+
+  - Processor: EndOfCheckPhase
+
+  - Processor: AppDmgVersioner
+    Arguments:
+      dmg_path: '%RECIPE_CACHE_DIR%/downloads/%NAME%.dmg'
+
+  - Processor: FileMover
+    Arguments:
+      source: '%RECIPE_CACHE_DIR%/downloads/%NAME%.dmg'
+      target: '%RECIPE_CACHE_DIR%/%NAME%-%version%.dmg'

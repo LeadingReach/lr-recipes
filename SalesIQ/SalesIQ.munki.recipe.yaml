@@ -1,0 +1,24 @@
+Description: Downloads the latest versions of SalesIQ
+Identifier: com.github.lr-recipes.munki.SalesIQ
+ParentRecipe: com.github.lr-recipes.download.SalesIQ
+MinimumVersion: '2.3'
+
+Input:
+  NAME: SalesIQ
+  MUNKI_REPO_SUBDIR: apps/%NAME%
+  pkginfo:
+    catalogs:
+      - site_default
+      - system_default
+    category: Productivity
+    description: Zoho SalesIQ.
+    developer: Zoho
+    display_name: SalesIQ
+    name: '%NAME%'
+    unattended_install: true
+
+Process:
+- Processor: MunkiImporter
+  Arguments:
+    pkg_path: '%RECIPE_CACHE_DIR%/%NAME%-%version%.dmg'
+    repo_subdirectory: '%MUNKI_REPO_SUBDIR%'
